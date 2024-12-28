@@ -23,6 +23,7 @@ bin: autoortho/.version
 		--linux-icon=autoortho/imgs/ao-icon.ico \
 		--enable-plugin=tk-inter \
 		--enable-plugin=eventlet \
+		--include-package="certifi" \
 		--include-data-file=./autoortho/.version*=. \
 		--include-data-file=./autoortho/templates/*.html=templates/ \
 		--include-data-file=./autoortho/lib/linux/*.so=lib/linux/ \
@@ -37,6 +38,7 @@ _autoortho_win.exe: autoortho/.version
 		--disable-ccache \
 		--enable-plugin=tk-inter \
 		--enable-plugin=eventlet \
+		--include-package="certifi" \
 		--windows-icon-from-ico=autoortho/imgs/ao-icon.ico \
 		--assume-yes-for-downloads \
 		--include-data-file=./autoortho/.version*=./ \
@@ -54,6 +56,7 @@ __main__.dist: autoortho/.version
 		--disable-ccache \
 		--enable-plugin=tk-inter \
 		--enable-plugin=eventlet \
+		--include-package="certifi" \
 		--windows-icon-from-ico=autoortho/imgs/ao-icon.ico \
 		--assume-yes-for-downloads \
 		--include-data-file=./autoortho/.version*=./ \
@@ -77,7 +80,7 @@ autoortho_win_$(VERSION).zip: __main__.dist
 	$(ZIP) $@ autoortho_release
 
 testperf:
-	python3.10 -m nuitka --verbose --verbose-output=nuitka.log  --include-data-dir=./autoortho/lib=lib --include-data-dir=./autoortho/testfiles=testfiles --onefile ./autoortho/perftest.py
+	python3.10 -m nuitka --verbose --verbose-output=nuitka.log  --include-data-dir=./autoortho/lib=lib --include-data-dir=./autoortho/testfiles=testfiles --include-package="certifi" --onefile ./autoortho/perftest.py
 
 %.txt: %.in
 	pip-compile $<
